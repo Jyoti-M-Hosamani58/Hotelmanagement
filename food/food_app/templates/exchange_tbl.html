@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exchange Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        .selectable-box {
+            border: 1px solid #007bff;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            display: inline-block;
+            width: calc(33.333% - 10px);
+            text-align: center;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .selectable-box:hover {
+            background-color: #007bff;
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .selected {
+            background-color: #28a745;
+            color: #fff;
+        }
+        form {
+            text-align: center;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function selectBox(event, type) {
+            var boxes = document.getElementsByClassName(type + '-box');
+            for (var i = 0; i < boxes.length; i++) {
+                boxes[i].classList.remove('selected');
+            }
+            event.target.classList.add('selected');
+            document.getElementById(type + 'Table').value = event.target.textContent.trim();
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Exchange Table</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label>Table Name</label>
+                <div>
+                    {% for table in table %}
+                    <div class="selectable-box old-box" onclick="selectBox(event, 'old')">{{ table.Table_name }}</div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="oldTable" name="oldTable">
+            </div>
+            <br><br>
+
+            <div>
+                <label>Exchange Table</label>
+                <div>
+                    {% for table in table %}
+                    <div class="selectable-box new-box" onclick="selectBox(event, 'new')">{{ table.Table_name }}</div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="newTable" name="newTable">
+            </div>
+            <br><br>
+
+            <input type="submit" value="Exchange">
+        </form>
+    </div>
+</body>
+</html>

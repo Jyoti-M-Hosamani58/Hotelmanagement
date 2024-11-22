@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Balaji Family Restaurant</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'admin_home' %}">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Table
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'add_table' %}">Add Table</a></li>
+          <li><a class="dropdown-item" href="{% url 'view_table' %}">View Table</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Item
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'add_item' %}">Add Item</a></li>
+          <li><a class="dropdown-item" href="{% url 'view_item' %}">View Item</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Company
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'add_company' %}">Add Company</a></li>
+          <li><a class="dropdown-item" href="{% url 'view_company' %}">View Company</a></li>
+        </ul>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Register
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'register' %}">Add Staff</a></li>
+          <li><a class="dropdown-item" href="{% url 'register_list' %}">Staff List</a></li>
+        </ul>
+
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Reports
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'sales_report' %}">Sales Reports</a></li>
+          <li><a class="dropdown-item" href="{% url 'item_report' %}">Item Report</a></li>
+          <li><a class="dropdown-item" href="{% url 'daily_report' %}">Daily Report</a></li>
+        </ul>
+
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'index' %}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<form method="post">
+    {% csrf_token %}
+                <p style="color:red;text-align:center;font-size:22px;font-weight:bold">{{msg}}</p>
+
+<table align="center" width="500" height="400">
+
+    <tr>
+        <td>Number</td>
+    <td><input type="text" name="t2" pattern="{0-9}" required class="form-control"></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+    <td><input type="email" name="t1"  required class="form-control"></td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td><input type="password" name="t3" required class="form-control"></td>
+    </tr>
+    <tr>
+        <td>User Type: </td>
+        <td><select name="utype" class="form-control">
+            <option value="admin">Admin</option>
+            <option value="user">User</option></td>
+        </select>
+    </tr>
+
+    <tr>
+      <td> </td>
+    <td><input type="submit" value="create an account" class="btn btn-success" style="width:400px;"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>
